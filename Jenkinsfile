@@ -1,44 +1,44 @@
 
 pipeline{
 
-	 environment {
-    	registry = "tongzahub/eks-jenkins-demo"
-    	registryCredential = 'docker-user-pass'
-    	dockerImage = ''
+	environment {
+		registry = "naomesp/eks-jenkins-demo"
+		registryCredential = 'docker-naome'
+		dockerImage = ''
 		region = "ap-southeast-1"
-		clusterName  = "arthit-devops-labs"
-  	}
+		clusterName  = "suthawan-labs"
+	}
 
 	agent any
 	
 	stages {
 
 
-		// stage('Build') {
-		// 	steps {
-		// 	script {
-        //  		 dockerImage = docker.build registry + ":$BUILD_NUMBER"
-       	// 	 }   
-		// 	}
-		// }
+		stage('Build') {
+			steps {
+			script {
+         		 dockerImage = docker.build registry + ":$BUILD_NUMBER"
+       		 }   
+			}
+		}
   
 
-		// stage('Push image') {
-		// 	steps {
-		// 		 script {
-        //     		docker.withRegistry( '', registryCredential ) {
-        //    			dockerImage.push()
-        //  		 }
-		// 	}
-		// }
+		stage('Push image') {
+			steps {
+				 script {
+            		docker.withRegistry( '', registryCredential ) {
+           			dockerImage.push()
+         		 }
+			}
+		}
 
 		// }
         
-		// stage('Remove Unused docker image') {
-     	// 	 steps{
-        // 		sh "docker rmi $registry:$BUILD_NUMBER"
-     	//  	}
-   		// }
+		stage('Remove Unused docker image') {
+     		 steps{
+        		sh "docker rmi $registry:$BUILD_NUMBER"
+     	 	}
+   		}
 
 		stage('aws creadentials'){
 			  steps {
