@@ -3,7 +3,7 @@ pipeline{
 
 	environment {
 		registry = "naomesp/eks-jenkins-demo"
-		registryCredential = 'docker-naome'
+		registryCredential = 'dockerhub-naome'
 		dockerImage = ''
 		region = "ap-southeast-1"
 		clusterName  = "suthawan-labs"
