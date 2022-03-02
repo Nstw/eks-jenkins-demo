@@ -21,7 +21,7 @@ spec:
         app: eks-jenkins-demo
     spec:
       containers:
-        - image: naomesp/eks-jenkins-demo:9
+        - image: naomesp/eks-jenkins-demo:latest
           imagePullPolicy: Always
           name: eks-jenkins-demo
           ports:
