@@ -40,21 +40,25 @@ pipeline{
 			}
 		}
 
-		stage('aws credentials'){
+		// stage('aws credentials'){
+		// 	steps {
+		// 		withAWS(credentials: 'aws-naome', region: 'ap-southeast-1') {
+		// 		  sh "aws iam list-account-aliases"
+		// 		  sh "aws eks --region $region update-kubeconfig --name $clusterName"
+		// 	  }
+		// 	}
+		// }
+
+		stage('Deploy EKS') {
 			steps {
 				withAWS(credentials: 'aws-naome', region: 'ap-southeast-1') {
-				  sh "aws iam list-account-aliases"
-				  sh "aws eks --region $region update-kubeconfig --name $clusterName"
-			  }
-			}
-		}
-
-		stage('eks deploy') {
-			steps {
-				sh 'echo Hello World'
-				sh 'kubectl get pods'
-				sh 'kubectl get nodes'
-				sh 'kubectl apply -f eks-example-deployment.yaml'
+					sh "aws iam list-account-aliases"
+					sh "aws eks --region $region update-kubeconfig --name $clusterName"
+					sh 'echo Hello World'
+					sh 'kubectl get pods'
+					sh 'kubectl get nodes'
+					sh 'kubectl apply -f eks-example-deployment.yaml'
+				}
 			}
 		}
 	}
