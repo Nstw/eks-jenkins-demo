@@ -29,6 +29,7 @@ pipeline{
             		docker.withRegistry( '', registryCredential ) {
            			dockerImage.push()
          		 }
+				 }
 			}
 		}
 
@@ -51,7 +52,7 @@ pipeline{
 			// 	]]) {
    			// 		 // AWS Code
 			// 	}
-			  withAWS(credentials: 'eks-credentials', region: 'ap-southeast-1') {
+			  withAWS(credentials: 'aws-naome', region: 'ap-southeast-1') {
 
 
 				  sh "aws iam list-account-aliases"
@@ -60,7 +61,7 @@ pipeline{
 				//   sh "cp /var/lib/jenkins/.kube/config  /home/ubuntu/.kube/config"
 
 				  sh 'kubectl get pods'
-				   sh 'kubectl get nodes'
+				  sh 'kubectl get nodes'
 				  
 			  }
 
@@ -68,7 +69,7 @@ pipeline{
 
 		}
 
-        stage('eks deploy') {
+  	stage('eks deploy') {
 
 			steps {
 				sh 'echo Hello World'
