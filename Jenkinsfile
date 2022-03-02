@@ -42,7 +42,7 @@ pipeline{
 
 		stage('aws credentials'){
 			steps {
-				withAWS(credentials: '$eksProfile', region: 'ap-southeast-1') {
+				withAWS(credentials: $eksProfile, region: 'ap-southeast-1') {
 				  sh "aws iam list-account-aliases"
 				  sh "aws eks --region $region update-kubeconfig --name $clusterName"
 			  }
