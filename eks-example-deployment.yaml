@@ -1,49 +1,49 @@
-# kind: Deployment
-# metadata:
-#   name: eks-jenkins-demo
-#   labels:
-#     app: eks-jenkins-demo
-#   namespace: default
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: eks-jenkins-demo
-#   strategy:
-#     rollingUpdate:
-#       maxSurge: 25%
-#       maxUnavailable: 25%
-#     type: RollingUpdate
-#   template:
-#     metadata:
-#       labels:
-#         app: eks-jenkins-demo
-#     spec:
-#       containers:
-#         - image: naomesp/eks-jenkins-demo:7
-#           imagePullPolicy: Always
-#           name: eks-jenkins-demo
-#           ports:
-#             - containerPort: 8080
-#               protocol: TCP
-apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: eks-jenkins-demo
   labels:
-    app: nginx
+    app: eks-jenkins-demo
+  namespace: default
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: eks-jenkins-demo
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
       labels:
-        app: nginx
+        app: eks-jenkins-demo
     spec:
       containers:
-        - name: nginx
-          image: nginx:1.14.2
+        - image: naomesp/eks-jenkins-demo:9
+          imagePullPolicy: Always
+          name: eks-jenkins-demo
           ports:
-            - containerPort: 80
+            - containerPort: 8080
+              protocol: TCP
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: nginx-deployment
+#   labels:
+#     app: nginx
+# spec:
+#   replicas: 3
+#   selector:
+#     matchLabels:
+#       app: nginx
+#   template:
+#     metadata:
+#       labels:
+#         app: nginx
+#     spec:
+#       containers:
+#         - name: nginx
+#           image: nginx:1.14.2
+#           ports:
+#             - containerPort: 80
